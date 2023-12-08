@@ -11,10 +11,13 @@
 #include <gl/GLU.h>
 #include "Scene.h"
 #include "Input.h"
+#include "Lighting.h"
+
 
 // Required variables; pointer to scene and input objects. Initialise variable used in delta time calculation.
 Scene* scene;
 Input* input;
+Lighting* lighting;
 int oldTimeSinceStart = 0;
 
 // Called when the window detects a change in size.
@@ -40,6 +43,9 @@ void renderScene(void)
 	scene->handleInput(deltaTime);
 	scene->update(deltaTime);
 	scene->render();
+
+	
+
 }
 
 // Handles keyboard input events from GLUT.
@@ -144,19 +150,21 @@ void processMouseButtons(int button, int state, int x, int y)
 // Initialises Input and Scene class, prior to starting Main Loop.
 int main(int argc, char **argv) 
 {
+	
 
 	// Init GLUT and create window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL);
 	//glutInitWindowPosition(100, 100);
-	glutInitWindowSize(1280, 720);
-	glutCreateWindow("My first triangle");
+	glutInitWindowSize(1920, 1080);
+	glutCreateWindow("CMP203 Project - Amir Akintunde Sanni");
 	
 	// Register callback functions for change in size and rendering.
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
 	glutIdleFunc(renderScene);
 
+	
 	// Register Input callback functions.
 	glutKeyboardFunc(processNormalKeys);
 	glutKeyboardUpFunc(processNormalKeysUp);
@@ -178,7 +186,7 @@ int main(int argc, char **argv)
 	// Initialise input and scene objects.
 	input = new Input();
 	scene = new Scene(input);
-	
+	lighting = new Lighting();
 	// Enter GLUT event processing cycle
 	glutMainLoop();
 

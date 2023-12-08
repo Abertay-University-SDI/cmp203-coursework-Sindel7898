@@ -15,13 +15,60 @@
 // Further includes should go here:
 #include "SOIL.h"
 #include <vector>
-#include "Shadow.h"
-
-
+#include <irrKlang.h>
+#include "model.h"
+#include "Skybox.h"
+#include "Camera1.h"
+#include"StartingBuilding.h"
+#include "Lighting.h"
+#include "PreceduallyGeneratedShapes.h"
+#include "material.h"
+using namespace irrklang;
+// for the audio system im using in this project  https://www.ambiera.com/irrklang/
 class Scene{
 
 public:
+	Skybox skybox;
+	Camera camera;
+	StartingBuilding startingBuilding;
+	Lighting lighting;
+	GLint SKYBOX;
+	GLint SKYBOX1;
+	GLint SKYBOX2;
+	GLint Earth;
+	GLint SATRUN;
+	Model Teapot;
+	Model NintendoDS;
+	Model SpaceShip;
+	PrecuduallyGeneratedShapes precuduallyGeneratedShapes;
+	Material material;
+	Model lamp;
+	Model Halo;
+	Model Drone;
+	Model Radio;
+	Model DocOc;
+
+	int SkyBoxChanger = 1;
+	int ColorSwitcher;
+	int renderType = 0;
+
+
+	float right = 0 ;
+	float upward = 0 ;
+	float forward = 0;
+	float ReflectionRotaion;
+	int Switcher = 0;
+	float Rotation;
+	//GLuint SKYBOX;
+	float xDiff = 0;
+	float yDiff = 0;
+
 	Scene(Input *in);
+	void OrbitSpaceShips();
+	void solarSystem();
+	void OutsideSolarSystem();
+	void cameraSwitcher();
+	void TrasnparentBox();
 	// Main render function
 	void render();
 	// Handle input function that receives delta time from parent.
@@ -30,7 +77,11 @@ public:
 	void update(float dt);
 	// Resizes the OpenGL output based on new window size.
 	void resize(int w, int h);
-
+	void DrawCube();
+	void RoomSpotlights();
+	void ReflectionFloor();
+	void Reflection();
+	void StartingRoom();
 protected:
 	// configure opengl render pipeline
 	void initialiseOpenGL();
@@ -55,6 +106,7 @@ protected:
 	char fps[40];
 	char mouseText[40];
 
+	char ObjectLocation[1000];
 };
 
 #endif
