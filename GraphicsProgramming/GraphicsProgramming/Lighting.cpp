@@ -92,7 +92,7 @@ void Lighting::RoomLight()
 	glPushMatrix();
 	glBindTexture(GL_TEXTURE_2D, NULL);
 	glTranslatef(X, Y, 0);
-	precuduallyGeneratedShapes.Sphere(60);
+	//precuduallyGeneratedShapes.Sphere(60);
 	glPopMatrix();
 
 	glPushMatrix();
