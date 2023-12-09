@@ -63,10 +63,13 @@ public:
 	float xDiff = 0;
 	float yDiff = 0;
 
+	int TurnOffLight;
+
 	Scene(Input *in);
 	void OrbitSpaceShips();
 	void solarSystem();
 	void OutsideSolarSystem();
+	void ObjectMover();
 	void cameraSwitcher();
 	void Shadow();
 	void TrasnparentBox();

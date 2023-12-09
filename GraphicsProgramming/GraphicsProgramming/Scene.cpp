@@ -73,7 +73,6 @@ Scene::Scene(Input* in)
 void Scene::handleInput(float dt)
 {
 	// Handle user input
-
 	// Switch between different colors for light 
 	if (input->isKeyDown('l') || input->isKeyDown('L')) {
 		ColorSwitcher++;
@@ -206,6 +205,7 @@ void Scene::update(float dt)
 	// update scene related variables.
 	
 		Rotation += 40 * dt;
+		
 
 		if (input->isKeyDown('q') || input->isKeyDown('q')) {
 			ReflectionRotaion += 40 * dt;
@@ -449,7 +449,9 @@ void Scene::RoomSpotlights() {
 	// Spotlight 2: Above left position
 	glPushMatrix();
 	glTranslatef(-12.0f, 5.0f, -12.0f);
-	lighting.ChangingSpotlight(ColorSwitcher);
+	lighting.ChangingSpotlight(GL_LIGHT6, ColorSwitcher);
+
+
 	glPopMatrix();
 
 	// Lamp for Spotlight 2
@@ -728,6 +730,7 @@ void Scene::OutsideSolarSystem()
 	glPopMatrix();
 }
 
+
 void Scene::cameraSwitcher() {
 
 	// Switcher == 0: Use the current camera position and orientation
@@ -870,11 +873,7 @@ void Scene::render() {
 	OrbitSpaceShips();
 	glPopMatrix();
 
-	//glPushMatrix();
-	////lighting.RoomLight();
-	//glPopMatrix();
-
-
+	
 	glPushMatrix();
 	solarSystem();
 	glPopMatrix();
@@ -894,9 +893,6 @@ void Scene::render() {
 	glPushMatrix();
 	lighting.RoomLight();
 	glPopMatrix();
-
-
-	
 
 	// End render geometry --------------------------------------
 	glEnd();

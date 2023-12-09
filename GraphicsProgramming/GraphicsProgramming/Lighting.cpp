@@ -28,7 +28,7 @@ void Lighting::Spotlight(GLenum LightName)
 }
 
 // Function to control the color of a spotlight based on a switcher value
-void Lighting::ChangingSpotlight(int Switcher)
+void Lighting::ChangingSpotlight(GLenum LightName,int Switcher)
 {
 	// Switch to control the color, storing RGB and alpha values
 	switch (Switcher)
@@ -72,56 +72,46 @@ void Lighting::ChangingSpotlight(int Switcher)
 	GLfloat Spot_Direction[] = { 0.0f, -1.0f, 0.0f };
 
 	// Set light properties using OpenGL functions
-	glLightfv(GL_LIGHT6, GL_DIFFUSE, Light_Diffuse);
-	glLightfv(GL_LIGHT6, GL_POSITION, Light_Position);
-	glLightfv(GL_LIGHT6, GL_AMBIENT, Light_Ambient);
-	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, Spot_Direction);
-	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 75.0f);
-	glLightf(GL_LIGHT6, GL_SPOT_EXPONENT, 10.0f);
+	glLightfv(LightName, GL_DIFFUSE, Light_Diffuse);
+	glLightfv(LightName, GL_POSITION, Light_Position);
+	glLightfv(LightName, GL_AMBIENT, Light_Ambient);
+	glLightfv(LightName, GL_SPOT_DIRECTION, Spot_Direction);
+	glLightf(LightName, GL_SPOT_CUTOFF, 75.0f);
+	glLightf(LightName, GL_SPOT_EXPONENT, 10.0f);
 
 	// Enable the specified light
-	glEnable(GL_LIGHT6);
-
+	glEnable(LightName);
 	// Restore the previous matrix from the stack
 	glPopMatrix();
 }
+
 
 void Lighting::RoomLight()
 {
 	// Push the current matrix onto the stack to avoid affecting other transformations
 	glPushMatrix();
+	glBindTexture(GL_TEXTURE_2D, NULL);
+	glTranslatef(X, Y, 0);
+	precuduallyGeneratedShapes.Sphere(60);
+	glPopMatrix();
 
+	glPushMatrix();
 	// Define the properties of the light
-	GLfloat Light_Diffuse[] = { 1.0f, 1.0f, 1.0f, 0.0f };
-	GLfloat Light_Position[] = { 0.0f, 0.1f, 0.0f, 1.0f };
+	GLfloat Light_Diffuse[] = { 1.0f, 0.0f, 1.0f, 1.0f};
+	GLfloat Light_Position[] = { X, Y, Z, 1.0f };
+	GLfloat Light_Ambient[] = { 1.0f, 0.0f, 1.0f, 1.0f };
 
 	// Set light properties using OpenGL functions
 	glLightfv(GL_LIGHT7, GL_DIFFUSE, Light_Diffuse);
 	glLightfv(GL_LIGHT7, GL_POSITION, Light_Position);
-	glLightf(GL_LIGHT7, GL_CONSTANT_ATTENUATION, 0.5);
-	glLightf(GL_LIGHT7, GL_LINEAR_ATTENUATION, 0.5);
+	glLightfv(GL_LIGHT7, GL_POSITION, Light_Ambient);
 
+	glLightf(GL_LIGHT7, GL_CONSTANT_ATTENUATION, 0.5);
+	glLightf(GL_LIGHT7, GL_LINEAR_ATTENUATION, 0.0);
 
 	// Enable the specified light
 	glEnable(GL_LIGHT7);
+
+	// Restore the previous matrix from the stack
 	glPopMatrix();
 }
-
-//void Lighting::shadow()
-//{
-//	glPushMatrix();
-//	glDisable(GL_COLOR_MATERIAL);
-//	GLfloat Light_Diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-//	GLfloat Light_Position[] = { 0.3f, 0.09f, 6.0f, 1.0f };
-//	GLfloat spot_Direction[] = { 0.0f, -1.0f, 0.0f };
-//
-//	glLightfv(GL_LIGHT6, GL_DIFFUSE, Light_Diffuse);
-//	glLightfv(GL_LIGHT6, GL_POSITION, Light_Position);
-//	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 45.0f);
-//	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, spot_Direction);
-//	glLightf(GL_LIGHT6, GL_SPOT_EXPONENT, 50.0);
-//	glEnable(GL_LIGHT6);
-//	glEnable(GL_COLOR_MATERIAL);
-//	glPopMatrix();
-//}
-//

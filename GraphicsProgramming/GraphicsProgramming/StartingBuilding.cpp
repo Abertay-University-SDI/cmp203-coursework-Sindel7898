@@ -24,13 +24,14 @@
 
  // draws the building and applies relevant texture to specofic parts 
 void StartingBuilding::Building() {
-	
+	glEnable(GL_LIGHTING);
+	material.MaterialSpecifics(1, 40);
 	glScalef(80, 20, 40);
 	glTranslatef(0, 0.3, 0);
 	glBindTexture(GL_TEXTURE_2D, Wall);
-	material.MaterialSpecifics(1, 40);
 	glBegin(GL_QUADS);
 
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glTexCoord2f(0.25f, 0.25f);
 	glVertex3f(-0.5f, 0.5f, -0.5f);
 	glTexCoord2f(0.75f, 0.25f);
@@ -41,6 +42,7 @@ void StartingBuilding::Building() {
 	glVertex3f(-0.5f, -0.5f, -0.5f);
 
 	//Right Face
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glTexCoord2f(0.75f, 0.25f);
 	glVertex3f(0.5f, 0.5f, -0.5f);
 	glTexCoord2f(1.0f, 0.25f);
@@ -55,6 +57,7 @@ void StartingBuilding::Building() {
 	glBindTexture(GL_TEXTURE_2D, Floor);
 	glBegin(GL_QUADS);
 	//Bottom Face
+	/*glNormal3f(0.0f, -1.0f, 0.0f);
 	glTexCoord2f(0.25f, 0.75f);
 	glVertex3f(-0.5f, -0.5f, 0.5f);
 	glTexCoord2f(0.75f, 0.75f);
@@ -62,12 +65,29 @@ void StartingBuilding::Building() {
 	glTexCoord2f(0.75f, 1.0f);
 	glVertex3f(0.5f, -0.5f, -0.5f);
 	glTexCoord2f(0.25f, 1.0f);
+	glVertex3f(-0.5f, -0.5f, -0.5f);*/
+
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glTexCoord2f(0.25f, 0.75f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glTexCoord2f(0.75f, 0.75f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glTexCoord2f(0.75f, 1.0f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glTexCoord2f(0.25f, 1.0f);
 	glVertex3f(-0.5f, -0.5f, -0.5f);
 	glEnd();
 
 	glBindTexture(GL_TEXTURE_2D, Wall);
 	glBegin(GL_QUADS);
 	//Left Face
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glTexCoord2f(0.25f, 0.25f);
 	glVertex3f(-0.5f, 0.5f, -0.5f);
 	glTexCoord2f(0.0f, 0.25f);
@@ -88,6 +108,7 @@ void StartingBuilding::Building() {
 	}
 	else
 	{
+		glNormal3f(0.0f, 1.0f, 0.0f);
 		glTexCoord2f(0.25f, 0.0f);
 		glVertex3f(-0.5f, 0.5f, 0.5f);
 		glTexCoord2f(0.75f, 0.0f);
@@ -100,6 +121,7 @@ void StartingBuilding::Building() {
 	
 
 	//Back Face
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2f(1.0f, 0.25f);
 	glVertex3f(-0.5f, 0.5f, 0.5f);
 	glTexCoord2f(0.75f, 0.25f);

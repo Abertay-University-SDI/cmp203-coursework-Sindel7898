@@ -7,7 +7,7 @@
 // Further includes should go here:
 #include "SOIL.h"
 #include <vector>
-
+#include"PreceduallyGeneratedShapes.h"
 
 class Lighting {
 public:
@@ -15,7 +15,13 @@ public:
 	float g;
 	float b;
 	float Alpha;	
+	int X = 0;
+	int Y = 0;
+	int Z = 0;
+
 	void Spotlight(GLenum LightName);
+	PrecuduallyGeneratedShapes precuduallyGeneratedShapes;
+	void ChangingSpotlight(GLenum LightName, int Switcher);
 
 	void ChangingSpotlight(int colorSwitcher);
 	void shadow();
