@@ -719,7 +719,7 @@ void Scene::OutsideSolarSystem()
 	glRotatef(Rotation, 1, 0, 0);
 	glScalef(7, 7, 7);
 	glDisable(GL_LIGHTING);
-	glColor3f(0.1, 0.1, 0.1);
+	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, SATRUN);
 	precuduallyGeneratedShapes.Sphere(60); // Function call to render a sphere
 	glEnable(GL_LIGHTING);
@@ -745,7 +745,7 @@ void Scene::cameraSwitcher() {
 			gluLookAt(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 		}
 	}
-
+	
 	// Switcher == 2: Set a specific view for the second scenario
 	if (Switcher == 2) {
 		gluLookAt(40.0f, 10.0f, -10.0f, 0, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f);
@@ -764,6 +764,7 @@ void Scene::cameraSwitcher() {
 		}
 	}
 }
+
 
 
 
@@ -889,6 +890,11 @@ void Scene::render() {
 	glPushMatrix();
 	OutsideSolarSystem();
 	glPopMatrix();
+
+	glPushMatrix();
+	lighting.RoomLight();
+	glPopMatrix();
+
 
 	
 

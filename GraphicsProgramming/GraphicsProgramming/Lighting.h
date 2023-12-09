@@ -18,6 +18,7 @@ public:
 	void Spotlight(GLenum LightName);
 
 	void ChangingSpotlight(int colorSwitcher);
+	void shadow();
 	void RoomLight();
 	void sunlight();
 	void ChangingSpotlight();

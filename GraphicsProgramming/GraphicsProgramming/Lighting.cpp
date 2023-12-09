@@ -68,7 +68,7 @@ void Lighting::ChangingSpotlight(int Switcher)
 	// Define the properties of the changing spotlight
 	GLfloat Light_Diffuse[] = { r, g, b, Alpha };
 	GLfloat Light_Position[] = { 0.0f, 0.1f, 0.0f, 1.0f };
-	GLfloat Light_Ambient[] = { 0.9f, 0.9f, 0.9f, 1.0f };
+	GLfloat Light_Ambient[] = { r, g, b, Alpha };
 	GLfloat Spot_Direction[] = { 0.0f, -1.0f, 0.0f };
 
 	// Set light properties using OpenGL functions
@@ -85,3 +85,43 @@ void Lighting::ChangingSpotlight(int Switcher)
 	// Restore the previous matrix from the stack
 	glPopMatrix();
 }
+
+void Lighting::RoomLight()
+{
+	// Push the current matrix onto the stack to avoid affecting other transformations
+	glPushMatrix();
+
+	// Define the properties of the light
+	GLfloat Light_Diffuse[] = { 1.0f, 1.0f, 1.0f, 0.0f };
+	GLfloat Light_Position[] = { 0.0f, 0.1f, 0.0f, 1.0f };
+
+	// Set light properties using OpenGL functions
+	glLightfv(GL_LIGHT7, GL_DIFFUSE, Light_Diffuse);
+	glLightfv(GL_LIGHT7, GL_POSITION, Light_Position);
+	glLightf(GL_LIGHT7, GL_CONSTANT_ATTENUATION, 0.5);
+	glLightf(GL_LIGHT7, GL_LINEAR_ATTENUATION, 0.5);
+
+
+	// Enable the specified light
+	glEnable(GL_LIGHT7);
+	glPopMatrix();
+}
+
+//void Lighting::shadow()
+//{
+//	glPushMatrix();
+//	glDisable(GL_COLOR_MATERIAL);
+//	GLfloat Light_Diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+//	GLfloat Light_Position[] = { 0.3f, 0.09f, 6.0f, 1.0f };
+//	GLfloat spot_Direction[] = { 0.0f, -1.0f, 0.0f };
+//
+//	glLightfv(GL_LIGHT6, GL_DIFFUSE, Light_Diffuse);
+//	glLightfv(GL_LIGHT6, GL_POSITION, Light_Position);
+//	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 45.0f);
+//	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, spot_Direction);
+//	glLightf(GL_LIGHT6, GL_SPOT_EXPONENT, 50.0);
+//	glEnable(GL_LIGHT6);
+//	glEnable(GL_COLOR_MATERIAL);
+//	glPopMatrix();
+//}
+//

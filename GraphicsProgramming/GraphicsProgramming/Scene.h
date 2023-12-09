@@ -47,7 +47,7 @@ public:
 	Model Drone;
 	Model Radio;
 	Model DocOc;
-
+	
 	int SkyBoxChanger = 1;
 	int ColorSwitcher;
 	int renderType = 0;
@@ -68,6 +68,7 @@ public:
 	void solarSystem();
 	void OutsideSolarSystem();
 	void cameraSwitcher();
+	void Shadow();
 	void TrasnparentBox();
 	// Main render function
 	void render();
