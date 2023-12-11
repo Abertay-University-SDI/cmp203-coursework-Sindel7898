@@ -15,7 +15,7 @@ bool Model::load(char* modelFilename, char* textureFilename)
 	result = loadModel(modelFilename);
 	if (!result)
 	{
-		MessageBox(NULL, "Model failed to load", "Error", MB_OK);
+		//MessageBox(NULL, "Model failed to load", "Error", MB_OK);
 		return false;
 	}
 

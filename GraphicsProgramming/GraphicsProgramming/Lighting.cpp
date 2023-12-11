@@ -88,17 +88,10 @@ void Lighting::ChangingSpotlight(GLenum LightName,int Switcher)
 
 void Lighting::RoomLight()
 {
-	// Push the current matrix onto the stack to avoid affecting other transformations
-	glPushMatrix();
-	glBindTexture(GL_TEXTURE_2D, NULL);
-	glTranslatef(X, Y, 0);
-	//precuduallyGeneratedShapes.Sphere(60);
-	glPopMatrix();
 
-	glPushMatrix();
 	// Define the properties of the light
-	GLfloat Light_Diffuse[] = { 1.0f, 0.0f, 1.0f, 1.0f};
-	GLfloat Light_Position[] = { X, Y, Z, 1.0f };
+	GLfloat Light_Diffuse[] = { 1.0f, 0.0f, 1.0f, 1.0f };
+	GLfloat Light_Position[] = { 0, 0, 0.0f };
 	GLfloat Light_Ambient[] = { 1.0f, 0.0f, 1.0f, 1.0f };
 
 	// Set light properties using OpenGL functions
@@ -112,6 +105,4 @@ void Lighting::RoomLight()
 	// Enable the specified light
 	glEnable(GL_LIGHT7);
 
-	// Restore the previous matrix from the stack
-	glPopMatrix();
 }

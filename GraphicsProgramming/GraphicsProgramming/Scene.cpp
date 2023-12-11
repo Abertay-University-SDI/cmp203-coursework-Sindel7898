@@ -396,6 +396,13 @@ void Scene::StartingRoom() {
 	startingBuilding.DisplayStand(0, -3);
 	glPopMatrix();
 
+	glPushMatrix();
+	glScalef(0.5, 0.5, 0.5);
+	glTranslatef(3.6, -0.5, 0);
+	startingBuilding.ReflectionStand(1, 3);
+	glPopMatrix();
+
+
 	// Render NintendoDS object
 	glPushMatrix();
 	glRotatef(90, 0.2f, 1.0f, 0.0f);
@@ -891,9 +898,13 @@ void Scene::render() {
 	glPopMatrix();
 
 	glPushMatrix();
+	glRotatef(Rotation, 1, 0, 0);
 	lighting.RoomLight();
 	glPopMatrix();
 
+	glPushMatrix();
+	Shadow();
+	glPopMatrix();
 	// End render geometry --------------------------------------
 	glEnd();
 	// Render text, should be last object rendered.
@@ -1004,4 +1015,85 @@ void Scene::displayText(float x, float y, float r, float g, float b, char* strin
 	gluPerspective(fov, ((float)width/(float)height), nearPlane, farPlane);
 	glMatrixMode(GL_MODELVIEW);
 }
+
+void Scene::light()
+{
+	glPushMatrix();
+	glDisable(GL_COLOR_MATERIAL);
+	GLfloat Light_Diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat Light_Position[] = { 0.3f, 0.09f, 6.0f, 1.0f };
+	GLfloat spot_Direction[] = { 0.0f, -1.0f, 0.0f };
+
+	glLightfv(GL_LIGHT6, GL_DIFFUSE, Light_Diffuse);
+	glLightfv(GL_LIGHT6, GL_POSITION, Light_Position);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 45.0f);
+	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, spot_Direction);
+	glLightf(GL_LIGHT6, GL_SPOT_EXPONENT, 50.0);
+	glEnable(GL_LIGHT6);
+	glEnable(GL_COLOR_MATERIAL);
+	glPopMatrix();
+}
+
+void Scene::render_plane()
+{
+	// Renders a plane
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);
+	glVertex3f(1, 1, 1);
+
+	glNormal3f(0, 1, 0);
+	glVertex3f(-1, 1, 1);
+
+	glNormal3f(0, 1, 0);
+	glVertex3f(-1, 1, -1);
+
+	glNormal3f(0, 1, 0);
+	glVertex3f(1, 1, -1);
+	glEnd();
+}
+
+void Scene::Shadow()
+{
+	GLfloat floorVerts[] = { -1.f, -0.038f, -1.f, -1.f, -0.038f, 1.f, 1.f, -0.038f, 1.f, 1.f, -0.038f, -1.f };
+
+	float shadowMatrix[16];
+	GLfloat Light_Position[] = { 0.3f, 1, 6.0f, 1.0f };
+	light();
+	shadow.generateShadowMatrix(shadowMatrix, Light_Position, floorVerts); // Generate shadow matrix
+
+	// Render teapot shadow
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+	glColor3f(0.1f, 0.1f, 0.1f); // Shadow's color
+
+	glPushMatrix();
+	glMultMatrixf((GLfloat*)shadowMatrix); // Translate to floor and draw shadow, matching any transforms on the object
+	glTranslatef(0.3, -0.5, 6);
+	glRotatef(90, 0, 1, 0);
+	glScalef(0.07, 0.07, 0.07);;  // Adjusted scaling factor for the shadow teapot
+	Teapot.render();
+	glPopMatrix();
+
+	glColor3f(1.0f, 1.0f, 1.0f); // Reset color
+	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+
+	// Render plane above teapot
+	glPushMatrix();
+	glTranslatef(0.3, -0.9, 6);  // Adjusted translation for the plane
+	glScalef(0.8, 0.8, 0.8);  // Adjusted scaling factor for the plane
+	render_plane(); // Render plane
+	glPopMatrix();
+
+	// Render teapot above shadow
+	glPushMatrix();
+	glTranslatef(0.3, 1, 6);
+	glRotatef(90, 0, 1, 0);
+	glScalef(0.05, 0.05, 0.05);  // Adjusted scaling factor for the teapot above the shadow
+	Teapot.render();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glPopMatrix();
+}
+
 

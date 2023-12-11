@@ -41,8 +41,6 @@ void Camera::update()
 	// Side Vector (right)
 	right = forward.cross(up);
 
-
-
 }
 
 //below functions self explanitory for moving

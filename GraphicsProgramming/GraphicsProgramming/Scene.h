@@ -22,12 +22,14 @@
 #include"StartingBuilding.h"
 #include "Lighting.h"
 #include "PreceduallyGeneratedShapes.h"
-#include "material.h"
+#include "Shadow.h"
+#include "Material.h"
 using namespace irrklang;
 // for the audio system im using in this project  https://www.ambiera.com/irrklang/
 class Scene{
 
 public:
+	Shadow shadow;
 	Skybox skybox;
 	Camera camera;
 	StartingBuilding startingBuilding;
@@ -91,6 +93,8 @@ protected:
 	void initialiseOpenGL();
 	// Renders text (x, y positions, RGB colour of text, string of text to be rendered)
 	void displayText(float x, float y, float r, float g, float b, char* string);
+	void light();
+	void render_plane();
 	// A function to collate all text output in a single location
 	void renderTextOutput();
 	void calculateFPS();
