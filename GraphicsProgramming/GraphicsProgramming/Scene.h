@@ -113,8 +113,14 @@ protected:
 	int frame = 0, time, timebase = 0;
 	char fps[40];
 	char mouseText[40];
+	char CameraMode[40];
+	char RenderingMode[40];
+	char ReflectedObjectRotation[40];
+	char Lightchangeing[50];
+	char Staticcamera[90];
+	char ChangeSKybox[90];
+	char RemoveROOF[90];
 
-	char ObjectLocation[1000];
 };
 
 #endif
