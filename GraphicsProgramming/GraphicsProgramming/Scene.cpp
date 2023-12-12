@@ -976,28 +976,41 @@ void Scene::calculateFPS()
 // Compiles standard output text including FPS and current mouse position.
 void Scene::renderTextOutput()
 {
-	// Render current mouse position and frames per second.
+	// Render current mouse position.
 	sprintf_s(mouseText, "Mouse: %i, %i", input->getMouseX(), input->getMouseY());
-	sprintf_s(CameraMode, "Use f to change the camera mode");
-	sprintf_s(RenderingMode, "Use r to change Rendering mode mode");
-	sprintf_s(ReflectedObjectRotation, "Use q to rotate reflected object");
-	sprintf_s(Lightchangeing, "Use l to change overhead light above radio");
-	sprintf_s(Staticcamera, "Use 1,2,3 to change betwen static cameras");
-	sprintf_s(RemoveROOF, "Use p to remove Roof ");
-	sprintf_s(ChangeSKybox, "Use o to change skyboxs");
 
-
+	// Display mouse position.
 	displayText(-1.f, 0.96f, 1.f, 0.f, 0.f, mouseText);
+
+	// Inform the user about camera mode change.
+	sprintf_s(CameraMode, "Use f to change the camera mode");
 	displayText(-1.f, 0.84f, 1.f, 1.f, 1.f, CameraMode);
+
+	// Inform the user about rendering mode change.
+	sprintf_s(RenderingMode, "Use r to change Rendering mode mode");
 	displayText(-1.f, 0.78f, 1.f, 1.f, 1.f, RenderingMode);
+
+	// Inform the user about reflected object rotation.
+	sprintf_s(ReflectedObjectRotation, "Use q to rotate reflected object");
 	displayText(-1.f, 0.72f, 1.f, 1.f, 1.f, ReflectedObjectRotation);
+
+	// Inform the user about changing the overhead light.
+	sprintf_s(Lightchangeing, "Use l to change overhead light above radio");
 	displayText(-1.f, 0.66f, 1.f, 1.f, 1.f, Lightchangeing);
+
+	// Inform the user about changing static cameras.
+	sprintf_s(Staticcamera, "Use 1,2,3 to change between static cameras");
 	displayText(-1.f, 0.56f, 1.f, 1.f, 1.f, Staticcamera);
+
+	// Inform the user about removing the roof.
+	sprintf_s(RemoveROOF, "Use p to remove Roof ");
 	displayText(-1.f, 0.46f, 1.f, 1.f, 1.f, RemoveROOF);
+
+	// Inform the user about changing the skybox.
+	sprintf_s(ChangeSKybox, "Use o to change skyboxes");
 	displayText(-1.f, 0.36f, 1.f, 1.f, 1.f, ChangeSKybox);
-
-
 }
+
 
 // Renders text to screen. Must be called last in render function (before swap buffers)
 void Scene::displayText(float x, float y, float r, float g, float b, char* string) {
