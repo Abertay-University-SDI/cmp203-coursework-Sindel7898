@@ -71,7 +71,6 @@ public:
 	void OrbitSpaceShips();
 	void solarSystem();
 	void OutsideSolarSystem();
-	void ObjectMover();
 	void cameraSwitcher();
 	void Shadow();
 	void TrasnparentBox();

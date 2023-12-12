@@ -16,7 +16,6 @@ public:
 	int m_resolution = 0;
 	void Sphere(int resolution);
 	float rotation;
-	void solarSystem();
 
 };
 

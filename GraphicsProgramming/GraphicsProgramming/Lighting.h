@@ -23,11 +23,8 @@ public:
 	PrecuduallyGeneratedShapes precuduallyGeneratedShapes;
 	void ChangingSpotlight(GLenum LightName, int Switcher);
 
-	void ChangingSpotlight(int colorSwitcher);
-	void shadow();
 	void RoomLight();
-	void sunlight();
-	void ChangingSpotlight();
+
 protected:
 	Input* input;
 };

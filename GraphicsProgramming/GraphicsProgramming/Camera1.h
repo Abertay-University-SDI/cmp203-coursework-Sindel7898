@@ -29,7 +29,6 @@ public:
 	float getUpX();
 	float getUpY();
 	float getUpZ();
-	void CameraMovement(float dt);
 
 	void moveForward(float dt);
 	void moveBackwords(float dt);
