@@ -1,2 +1,3 @@
 # CMP203-Framework
-Example project for CMP203 with shadow code
+Name - Amir Akintunde Sanni
+Project i made for my graphics programming class
