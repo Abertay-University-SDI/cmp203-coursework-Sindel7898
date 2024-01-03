@@ -9,8 +9,8 @@ Camera::Camera() {
 }
 void Camera::update()
 {
-		// handle rotation 
-		// YAW = LEFT to RIGHT. PITCH = UP and DOWN Roll = tilting your head
+		// Manage rotation: 
+		// YAW = Left to Right, PITCH = Up and Down, Roll = Tilting your head.
 	cosY = cosf(Yaw * 3.1415 / 180);
 	sinY = sinf(Yaw * 3.1415 / 180);
 	sinP = sinf(Pitch * 3.1415 / 180);
@@ -18,9 +18,9 @@ void Camera::update()
 	cosR = cosf(Roll * 3.1415 / 180);
 	sinR = sinf(Roll * 3.1415 / 180);
 
-	// Calculate the three vectors to put into  glu Lookat 
-	// Look direction, position and the up vector 
-	// This function could also calculate the right vector
+	// Compute the three vectors required for gluLookAt: 
+	// Look direction, position, and the up vector. 
+	// This function may also determine the right vector
 
 	lookAt.x = position.x + forward.x;
 	lookAt.y = position.y + forward.y;
@@ -60,11 +60,7 @@ void Camera::moveLeft(float dt)
 	position.x = position.x - right.x * dt * movespeed;
 	position.z = position.z - right.z * dt * movespeed;
 }
-void Camera::moveRight(float dt)
-{
-	position.x = position.x + right.x * dt * movespeed;
-	position.z = position.z + right.z * dt * movespeed;
-}
+
 void Camera::moveUp(float dt)
 {
 	position.y = position.y + up.y * dt * movespeed;
@@ -74,21 +70,27 @@ void Camera::moveDown(float dt)
 	position.y = position.y - up.y * dt * movespeed;
 }
 
+void Camera::moveRight(float dt)
+{
+	position.x = position.x + right.x * dt * movespeed;
+	position.z = position.z + right.z * dt * movespeed;
+}
+
 void Camera::setPitchYaw(float pi, float ya)
 {
 	Pitch = pi;
 	Yaw = ya;
 }
 
-//Used for controling the mouse
+// Employed for mouse control.
 void Camera::controlMouse(float dt, int xDiff, int yDiff)
 {
-	// if the difference for X is not equal to 0 then calculate the Yaw(left to right)
+// Calculate the Yaw (left to right) if there is a non-zero difference for X.
 	if (xDiff != 0)
 	{
 		Yaw += -xDiff * dt * movespeed;
 	}
-	// if the difference for Y is not equal to 0 then calculate the Pitch(up and down)
+	// Calculate the Pitch (up and down) if there is a non-zero difference for Y.
 	if (yDiff != 0)
 	{
 		Pitch -= yDiff * dt * movespeed;
@@ -96,10 +98,7 @@ void Camera::controlMouse(float dt, int xDiff, int yDiff)
 }
 
 //Getters
-float Camera::getPosX()
-{
-	return position.x;
-}
+
 float Camera::getPosY()
 {
 	return position.y;
@@ -131,4 +130,9 @@ float Camera::getUpY()
 float Camera::getUpZ()
 {
 	return up.z;
+}
+
+float Camera::getPosX()
+{
+	return position.x;
 }
