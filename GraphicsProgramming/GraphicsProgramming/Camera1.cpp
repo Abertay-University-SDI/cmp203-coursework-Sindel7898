@@ -7,9 +7,11 @@ Camera::Camera() {
 	position = Vector3(0.0f, 0.0f, 6.0f);
 
 }
+
 void Camera::update()
 {
 		// Manage rotation: 
+	        //code provided from past pas lecture paul
 		// YAW = Left to Right, PITCH = Up and Down, Roll = Tilting your head.
 	cosY = cosf(Yaw * 3.1415 / 180);
 	sinY = sinf(Yaw * 3.1415 / 180);
